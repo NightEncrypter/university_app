@@ -182,29 +182,11 @@ const HomeStack = () => {
                   </View>
                 </View>
               ) : (
-                <View
-                  style={{
-                    backgroundColor: '#F4F4FC',
-                    paddingVertical: 11,
-                  }}>
-                  <View
-                    style={{
-                      flexDirection: 'row',
-                      justifyContent: 'space-between',
-                      paddingHorizontal: 20,
-
-                      alignItems: 'center',
-                    }}>
+                <View style={styles.head_container}>
+                  <View style={styles.head}>
                     <TouchableOpacity
                       onPress={() => prop.navigation.navigate('Home')}
-                      style={{
-                        // backgroundColor: '#00DDFB',
-                        width: 50,
-                        height: 50,
-                        borderRadius: 50,
-                        justifyContent: 'center',
-                        alignItems: 'center',
-                      }}>
+                      style={styles.svg_btn}>
                       <Svg
                         style={{width: 45, height: 45}}
                         viewBox="0 0 245 204">
@@ -221,26 +203,12 @@ const HomeStack = () => {
                         alignItems: 'center',
                         justifyContent: 'space-between',
                       }}>
-                      <Text
-                        style={{
-                          fontFamily: 'Poppins-Medium',
-                          fontSize: 13,
-                          color: '#006C7B',
-                          letterSpacing: 0.2,
-                        }}>
-                        Hey, Jessica
-                      </Text>
+                      <Text style={styles.user_greet}>Hey, Jessica</Text>
 
-                      <View
-                        style={{
-                          elevation: 5,
-                          shadowColor: 'aqua',
-                          borderRadius: 20,
-                          marginLeft: 20,
-                        }}>
+                      <View style={styles.img_container}>
                         <Image
                           source={require('../assets/img/scarlet.jpg')}
-                          style={{borderRadius: 50, width: 40, height: 40}}
+                          style={styles.user_img}
                         />
                       </View>
 
@@ -281,5 +249,39 @@ const HomeStack = () => {
     </Tab.Navigator>
   );
 };
+
+const styles = StyleSheet.create({
+  head_container: {
+    backgroundColor: '#F4F4FC',
+    paddingHorizontal: 20,
+    paddingVertical: 11,
+  },
+  head: {
+    flexDirection: 'row',
+    justifyContent: 'space-between',
+
+    alignItems: 'center',
+  },
+  svg_btn: {
+    width: 50,
+    height: 50,
+    borderRadius: 50,
+    justifyContent: 'center',
+    alignItems: 'center',
+  },
+  user_greet: {
+    fontFamily: 'Poppins-Medium',
+    fontSize: 13,
+    color: '#006C7B',
+    letterSpacing: 0.2,
+  },
+  img_container: {
+    elevation: 5,
+    shadowColor: 'aqua',
+    borderRadius: 20,
+    marginLeft: 20,
+  },
+  user_img: {borderRadius: 50, width: 40, height: 40},
+});
 
 export default HomeStack;

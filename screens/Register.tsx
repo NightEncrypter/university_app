@@ -61,38 +61,40 @@ const Register = () => {
 
       <View style={{marginHorizontal: 40}}>
         {userData.map((user, i) => (
-          <Animatable.View
-            animation={'bounce'}
-            delay={i * 700}
-            duration={200}
+          <View
+            key={i}
             style={{
               marginBottom: 15,
-            }}
-            key={i}>
-            <Text
+            }}>
+            <Animatable.Text
+              delay={i * 300}
+              animation={'fadeIn'}
               style={{
                 color: 'white',
                 fontFamily: 'Poppins-Medium',
                 marginBottom: 8,
-                letterSpacing: 1.2,
-                textTransform: 'capitalize',
                 fontSize: 13,
+                letterSpacing: 1,
+                textTransform: 'capitalize',
               }}>
               {user.label}
-            </Text>
-            <View
+            </Animatable.Text>
+
+            {/* Input Container */}
+            <Animatable.View
+              delay={i * 400}
+              animation={'zoomInUp'}
               style={{
                 width: '100%',
                 flexDirection: 'row',
                 backgroundColor: 'white',
-                paddingHorizontal: 20,
+                paddingHorizontal: 15,
                 borderRadius: 19,
               }}>
               <View
                 style={{
                   justifyContent: 'center',
-                  alignItems: 'center',
-                  // marginRight: 6,
+                  // marginRight: 3,
                 }}>
                 {i == 0 ? (
                   <FIcon name={user.icon} color="#008092" size={user.size} />
@@ -101,33 +103,36 @@ const Register = () => {
                     name={user.icon}
                     color="#008092"
                     size={user.size}
+                    style={{
+                      padding: 0,
+                      margin: 0,
+                    }}
                   />
                 )}
               </View>
 
               <TextInput
-                onChange={changeText}
                 style={{
                   backgroundColor: 'transparent',
-                  paddingVertical: 7,
+                  color: 'black',
                   width: '100%',
                   letterSpacing: 0.5,
                   fontSize: 13,
-                  color: 'black',
                   fontFamily: 'Poppins-Regular',
-                  marginLeft: 5,
-                  paddingRight: 18,
+                  paddingVertical: 7,
+                  paddingHorizontal: 8,
+                  paddingRight: 15,
                 }}
                 placeholder={`Enter your ${user.label.toLowerCase()} `}
                 placeholderTextColor={'grey'}
               />
-            </View>
-          </Animatable.View>
+            </Animatable.View>
+          </View>
         ))}
 
-        <Animatable.View animation={'fadeInUp'} delay={2400}>
+        <Animatable.View animation={'fadeInUp'} delay={1500}>
           <TouchableOpacity
-            onPress={() => navigation.navigate('Home')}
+            onPress={() => navigation.navigate('HomeStack')}
             style={{
               marginTop: 15,
               backgroundColor: '#008092',

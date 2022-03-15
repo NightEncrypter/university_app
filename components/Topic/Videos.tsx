@@ -9,7 +9,7 @@ const Videos = ({i}: any) => {
     <Animatable.View
       delay={300 * i}
       style={styles.video}
-      animation={'fadeInUpBig'}
+      animation={'zoomIn'}
       key={i}>
       <View style={{flexDirection: 'row', alignItems: 'center'}}>
         <FeatherIcon

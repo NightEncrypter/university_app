@@ -37,6 +37,10 @@ import DrawerStack from './Nester/DrawerStack';
 // import B from './DrawerStuffs/B';
 import {SafeAreaProvider} from 'react-native-safe-area-context';
 import Chat from './screens/Chat';
+import Calendar from './screens/Calendar';
+import Assign from './Modals/Assign';
+import {Provider} from 'react-redux';
+import {store} from './store/store';
 
 const Section: React.FC<{
   title: string;
@@ -76,22 +80,6 @@ const App = () => {
   };
 
   function LogoTitle() {
-    const styles = StyleSheet.create({
-      container: {
-        flex: 1,
-        justifyContent: 'center',
-        paddingHorizontal: 10,
-      },
-      button: {
-        alignItems: 'center',
-        backgroundColor: '#DDDDDD',
-        padding: 10,
-      },
-      countContainer: {
-        alignItems: 'center',
-        padding: 10,
-      },
-    });
     return (
       <View
         style={{
@@ -121,213 +109,231 @@ const App = () => {
   return (
     <SafeAreaProvider style={{flex: 1}}>
       <StatusBar barStyle={isDarkMode ? 'light-content' : 'dark-content'} />
-      {/* <View style={{flex: 1}}> */}
-      <NavigationContainer>
-        <Stack.Navigator initialRouteName="Login">
-          <Stack.Screen
-            name="HomeStack"
-            component={HomeStack}
-            options={{headerShown: false}}
-          />
-          <Stack.Screen
-            name="Chat"
-            component={Chat}
-            options={{headerShown: false}}
-          />
-          {/* <Stack.Screen
+      <Provider store={store}>
+        <NavigationContainer>
+          <Stack.Navigator initialRouteName="Login">
+            <Stack.Screen
+              name="HomeStack"
+              component={HomeStack}
+              options={{headerShown: false}}
+            />
+            <Stack.Screen
+              name="Chat"
+              component={Chat}
+              options={{headerShown: false}}
+            />
+            {/* <Stack.Screen
               name="DrawerStack"
               component={DrawerStack}
               options={{headerShown: false}}
             /> */}
 
-          <Stack.Screen
-            name="Units"
-            component={Units}
-            options={{
-              header: props => {
-                return (
-                  <View
-                    style={{
-                      backgroundColor: '#F4F4FC',
-                    }}>
+            <Stack.Screen
+              name="Units"
+              component={Units}
+              options={{
+                header: props => {
+                  return (
                     <View
                       style={{
-                        paddingHorizontal: 15,
-                        flexDirection: 'row',
-                        justifyContent: 'space-between',
-                        alignItems: 'center',
-                        marginVertical: 10,
+                        backgroundColor: '#F4F4FC',
                       }}>
-                      <TouchableOpacity
-                        onPress={() => {
-                          props.navigation.goBack();
-                        }}
-                        style={{
-                          backgroundColor: '#00B1C9',
-                          width: 45,
-                          height: 45,
-                          justifyContent: 'center',
-                          alignItems: 'center',
-                          borderRadius: 50,
-                        }}>
-                        <Icon
-                          name="corner-up-left"
-                          size={28}
-                          style={{
-                            fontFamily: 'Poppins-Medium',
-                            color: 'white',
-                          }}
-                        />
-                      </TouchableOpacity>
-
                       <View
                         style={{
-                          paddingHorizontal: 30,
-                          paddingVertical: 6,
-                          backgroundColor: 'white',
-
+                          paddingHorizontal: 15,
                           flexDirection: 'row',
-                          justifyContent: 'center',
+                          justifyContent: 'space-between',
                           alignItems: 'center',
-                          borderRadius: 25,
-                          // shadowColor: '#009BB0',
-                          elevation: 4,
+                          marginVertical: 10,
                         }}>
-                        <Text
-                          style={{
-                            fontFamily: 'Poppins-Bold',
-                            fontSize: 17,
-                            color: '#000',
-                            textTransform: 'uppercase',
-                            letterSpacing: 0.8,
-                          }}>
-                          Units
-                        </Text>
-                      </View>
-
-                      <TouchableOpacity
-                        style={{
-                          justifyContent: 'center',
-                          alignItems: 'center',
-                          borderRadius: 50,
-                        }}>
-                        <MatIcon
-                          name="bell"
-                          size={28}
-                          style={{
-                            color: '#00B1C9',
+                        <TouchableOpacity
+                          onPress={() => {
+                            props.navigation.goBack();
                           }}
-                        />
-                      </TouchableOpacity>
+                          style={{
+                            backgroundColor: '#00B1C9',
+                            width: 45,
+                            height: 45,
+                            justifyContent: 'center',
+                            alignItems: 'center',
+                            borderRadius: 50,
+                          }}>
+                          <Icon
+                            name="corner-up-left"
+                            size={28}
+                            style={{
+                              fontFamily: 'Poppins-Medium',
+                              color: 'white',
+                            }}
+                          />
+                        </TouchableOpacity>
+
+                        <View
+                          style={{
+                            paddingHorizontal: 30,
+                            paddingVertical: 6,
+                            backgroundColor: 'white',
+
+                            flexDirection: 'row',
+                            justifyContent: 'center',
+                            alignItems: 'center',
+                            borderRadius: 25,
+                            // shadowColor: '#009BB0',
+                            elevation: 4,
+                          }}>
+                          <Text
+                            style={{
+                              fontFamily: 'Poppins-Bold',
+                              fontSize: 17,
+                              color: '#000',
+                              textTransform: 'uppercase',
+                              letterSpacing: 0.8,
+                            }}>
+                            Units
+                          </Text>
+                        </View>
+
+                        <TouchableOpacity
+                          style={{
+                            justifyContent: 'center',
+                            alignItems: 'center',
+                            borderRadius: 50,
+                          }}>
+                          <MatIcon
+                            name="bell"
+                            size={28}
+                            style={{
+                              color: '#00B1C9',
+                            }}
+                          />
+                        </TouchableOpacity>
+                      </View>
                     </View>
-                  </View>
-                );
-              },
-            }}
-          />
-          <Stack.Screen
-            name="Topics"
-            component={Topics}
-            options={{
-              header: props => {
-                return (
-                  <View
-                    style={{
-                      backgroundColor: '#F4F4FC',
-                    }}>
+                  );
+                },
+              }}
+            />
+
+            <Stack.Screen
+              component={Calendar}
+              name="Calendar"
+              options={{
+                headerShown: false,
+              }}
+            />
+
+            <Stack.Screen
+              name="Topics"
+              component={Topics}
+              options={{
+                header: props => {
+                  return (
                     <View
                       style={{
-                        paddingHorizontal: 15,
-                        flexDirection: 'row',
-                        justifyContent: 'space-between',
-                        alignItems: 'center',
-                        marginVertical: 10,
+                        backgroundColor: '#F4F4FC',
                       }}>
-                      <TouchableOpacity
-                        onPress={() => {
-                          props.navigation.goBack();
-                        }}
-                        style={{
-                          backgroundColor: '#00B1C9',
-                          width: 45,
-                          height: 45,
-                          justifyContent: 'center',
-                          alignItems: 'center',
-                          borderRadius: 50,
-                        }}>
-                        <Icon
-                          name="corner-up-left"
-                          size={28}
-                          style={{
-                            fontFamily: 'Poppins-Medium',
-                            color: 'white',
-                          }}
-                        />
-                      </TouchableOpacity>
-
                       <View
                         style={{
-                          paddingHorizontal: 30,
-                          paddingVertical: 6,
-                          backgroundColor: 'white',
-
+                          paddingHorizontal: 15,
                           flexDirection: 'row',
-                          justifyContent: 'center',
+                          justifyContent: 'space-between',
                           alignItems: 'center',
-                          borderRadius: 25,
-                          // shadowColor: '#009BB0',
-                          elevation: 4,
+                          marginVertical: 10,
                         }}>
-                        <Text
-                          style={{
-                            fontFamily: 'Poppins-Bold',
-                            fontSize: 17,
-                            color: '#000',
-                            textTransform: 'uppercase',
-                            letterSpacing: 0.8,
-                          }}>
-                          Topic
-                        </Text>
-                      </View>
-
-                      <TouchableOpacity
-                        style={{
-                          justifyContent: 'center',
-                          alignItems: 'center',
-                          borderRadius: 50,
-                        }}>
-                        <MatIcon
-                          name="bell"
-                          size={28}
-                          style={{
-                            color: '#00B1C9',
+                        <TouchableOpacity
+                          onPress={() => {
+                            props.navigation.goBack();
                           }}
-                        />
-                      </TouchableOpacity>
+                          style={{
+                            backgroundColor: '#00B1C9',
+                            width: 45,
+                            height: 45,
+                            justifyContent: 'center',
+                            alignItems: 'center',
+                            borderRadius: 50,
+                          }}>
+                          <Icon
+                            name="corner-up-left"
+                            size={28}
+                            style={{
+                              fontFamily: 'Poppins-Medium',
+                              color: 'white',
+                            }}
+                          />
+                        </TouchableOpacity>
+
+                        <View
+                          style={{
+                            paddingHorizontal: 30,
+                            paddingVertical: 6,
+                            backgroundColor: 'white',
+
+                            flexDirection: 'row',
+                            justifyContent: 'center',
+                            alignItems: 'center',
+                            borderRadius: 25,
+                            // shadowColor: '#009BB0',
+                            elevation: 4,
+                          }}>
+                          <Text
+                            style={{
+                              fontFamily: 'Poppins-Bold',
+                              fontSize: 17,
+                              color: '#000',
+                              textTransform: 'uppercase',
+                              letterSpacing: 0.8,
+                            }}>
+                            Topic
+                          </Text>
+                        </View>
+
+                        <TouchableOpacity
+                          style={{
+                            justifyContent: 'center',
+                            alignItems: 'center',
+                            borderRadius: 50,
+                          }}>
+                          <MatIcon
+                            name="bell"
+                            size={28}
+                            style={{
+                              color: '#00B1C9',
+                            }}
+                          />
+                        </TouchableOpacity>
+                      </View>
                     </View>
-                  </View>
-                );
-              },
-            }}
-          />
-          <Stack.Screen
-            name="Profile"
-            component={Profile}
-            options={{headerShown: false}}
-          />
-          <Stack.Screen
-            name="Login"
-            component={Login}
-            options={{headerShown: false}}
-          />
-          <Stack.Screen
-            name="Reg"
-            component={Register}
-            options={{headerShown: false}}
-          />
-        </Stack.Navigator>
-      </NavigationContainer>
-      {/* </View> */}
+                  );
+                },
+              }}
+            />
+
+            <Stack.Screen
+              name="Modal"
+              component={Assign}
+              options={{
+                headerShown: false,
+              }}
+            />
+
+            <Stack.Screen
+              name="Profile"
+              component={Profile}
+              options={{headerShown: false}}
+            />
+            <Stack.Screen
+              name="Login"
+              component={Login}
+              options={{headerShown: false}}
+            />
+            <Stack.Screen
+              name="Reg"
+              component={Register}
+              options={{headerShown: false}}
+            />
+          </Stack.Navigator>
+        </NavigationContainer>
+      </Provider>
     </SafeAreaProvider>
   );
 };

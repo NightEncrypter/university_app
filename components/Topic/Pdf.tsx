@@ -55,7 +55,7 @@ const Pdf = ({i}: any) => {
 
   return (
     <Animatable.View
-      animation={'flipInX'}
+      animation={'zoomIn'}
       delay={300 * i}
       style={styles.pdf}
       key={i}>

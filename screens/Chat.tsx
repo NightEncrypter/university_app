@@ -4,6 +4,7 @@ import {ScrollView} from 'react-native-gesture-handler';
 import {TextInput, Pressable} from 'react-native';
 import Icon from 'react-native-vector-icons/Feather';
 import EnIcon from 'react-native-vector-icons/Entypo';
+import SendInputMessage from '../components/Chat/SendInputMessage';
 const Chat = () => {
   return (
     <View
@@ -148,79 +149,7 @@ const Chat = () => {
         </View>
       </ScrollView>
 
-      <View
-        style={{
-          paddingVertical: 0,
-          paddingHorizontal: 10,
-          position: 'absolute',
-          bottom: 10,
-          left: 10,
-          right: 10,
-        }}>
-        <View
-          style={{
-            // marginHorizontal: 20,
-
-            elevation: 10,
-            // width: '100%',
-            flexDirection: 'row',
-            justifyContent: 'space-between',
-            backgroundColor: 'white',
-            alignItems: 'center',
-            paddingHorizontal: 10,
-            paddingVertical: 5,
-            borderRadius: 19,
-          }}>
-          <TouchableOpacity
-            style={{
-              justifyContent: 'center',
-              alignItems: 'center',
-              marginLeft: -7,
-              width: 40,
-              height: 40,
-              borderRadius: 50,
-            }}>
-            <EnIcon name="emoji-happy" color="#CCCCCC" size={24} style={{}} />
-          </TouchableOpacity>
-          <TextInput
-            style={{
-              backgroundColor: 'transparent',
-              color: 'black',
-              // flex: 1,
-              width: '67%',
-              letterSpacing: 0.5,
-              fontSize: 16,
-              fontFamily: 'Poppins-Medium',
-            }}
-            placeholder={'Enter your message'}
-          />
-
-          <TouchableOpacity
-            style={{
-              justifyContent: 'center',
-              alignItems: 'center',
-              marginRight: 5,
-
-              borderRadius: 50,
-            }}>
-            <Icon name="paperclip" color="#CCCCCC" size={24} style={{}} />
-          </TouchableOpacity>
-          <TouchableOpacity
-            style={{
-              // marginLeft: 12,
-
-              justifyContent: 'center',
-              alignItems: 'center',
-
-              backgroundColor: '#007485',
-              width: 48,
-              height: 48,
-              borderRadius: 50,
-            }}>
-            <Icon name="send" color="white" size={24} style={{}} />
-          </TouchableOpacity>
-        </View>
-      </View>
+      <SendInputMessage />
     </View>
   );
 };

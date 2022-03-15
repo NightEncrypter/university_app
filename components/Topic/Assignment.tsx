@@ -51,7 +51,7 @@ const Assignment = ({i}: any) => {
 
   return (
     <View style={styles.assign}>
-      <View style={{flexDirection: 'row', alignItems: 'center'}}>
+      <View style={{flexDirection: 'row', alignItems: 'center', zIndex: 2}}>
         <FeatherIcon
           name="file-text"
           size={20}
