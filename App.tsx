@@ -151,7 +151,6 @@ const App = () => {
                             props.navigation.goBack();
                           }}
                           style={{
-                            backgroundColor: '#00B1C9',
                             width: 45,
                             height: 45,
                             justifyContent: 'center',
@@ -163,7 +162,7 @@ const App = () => {
                             size={28}
                             style={{
                               fontFamily: 'Poppins-Medium',
-                              color: 'white',
+                              color: '#00D2EE',
                             }}
                           />
                         </TouchableOpacity>
@@ -195,15 +194,19 @@ const App = () => {
 
                         <TouchableOpacity
                           style={{
+                            width: 45,
+                            height: 45,
                             justifyContent: 'center',
                             alignItems: 'center',
                             borderRadius: 50,
+                            backgroundColor: 'white',
+                            elevation: 2,
                           }}>
                           <MatIcon
                             name="bell"
                             size={28}
                             style={{
-                              color: '#00B1C9',
+                              color: '#50EAFF',
                             }}
                           />
                         </TouchableOpacity>
@@ -245,7 +248,6 @@ const App = () => {
                             props.navigation.goBack();
                           }}
                           style={{
-                            backgroundColor: '#00B1C9',
                             width: 45,
                             height: 45,
                             justifyContent: 'center',
@@ -257,7 +259,7 @@ const App = () => {
                             size={28}
                             style={{
                               fontFamily: 'Poppins-Medium',
-                              color: 'white',
+                              color: '#00D2EE',
                             }}
                           />
                         </TouchableOpacity>
@@ -289,15 +291,19 @@ const App = () => {
 
                         <TouchableOpacity
                           style={{
+                            width: 45,
+                            height: 45,
                             justifyContent: 'center',
                             alignItems: 'center',
                             borderRadius: 50,
+                            backgroundColor: 'white',
+                            elevation: 2,
                           }}>
                           <MatIcon
                             name="bell"
                             size={28}
                             style={{
-                              color: '#00B1C9',
+                              color: '#50EAFF',
                             }}
                           />
                         </TouchableOpacity>

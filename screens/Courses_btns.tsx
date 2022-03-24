@@ -22,6 +22,7 @@ const Courses_btns = () => {
           //   // animation={'fadeIn'}
           // >
           <TouchableOpacity
+            key={i}
             style={[
               styles.btn,
               {

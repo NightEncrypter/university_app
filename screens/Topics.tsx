@@ -1,14 +1,27 @@
 import {ScrollView, StatusBar, StyleSheet, Text, View} from 'react-native';
 
-import React, {useState} from 'react';
+import React, {useEffect, useState} from 'react';
 import FeatherIcon from 'react-native-vector-icons/Feather';
 import AntIcon from 'react-native-vector-icons/FontAwesome5';
 import Pdf from '../components/Topic/Pdf';
 import Videos from '../components/Topic/Videos';
 import Assignment from '../components/Topic/Assignment';
 import AllLink from '../components/Topic/AllLink';
+import {useDispatch, useSelector} from 'react-redux';
+import {GetTopic} from '../redux/actions/topicActions';
+import {RootState} from '../store/store';
 
-const Topic = ({navigation}: any) => {
+const Topic = ({route}: any) => {
+  const dispatch = useDispatch();
+
+  const {topicData} = useSelector((state: RootState) => state.topics);
+
+  useEffect(() => {
+    dispatch(GetTopic(route.params.topic));
+
+    console.log(topicData, 'this is topic screen');
+  }, [dispatch]);
+
   const styles = StyleSheet.create({
     topic_info: {
       fontFamily: 'Poppins-Medium',
@@ -72,93 +85,109 @@ const Topic = ({navigation}: any) => {
         </View> */}
       </View>
 
-      <View style={{paddingHorizontal: 18}}>
-        <View
-          style={[
-            styles.shape,
-            {
-              backgroundColor: '#05CACA',
-            },
-          ]}>
-          <Text style={styles.topic_info}>Introduction To VLSI</Text>
-        </View>
-        {/* PDFS */}
-        <View style={{marginVertical: 25}}>
-          <View style={styles.pdf_head}>
-            <Text style={styles.pdf_text}>PDFS</Text>
-            <AntIcon name="file-pdf" size={17} style={{color: 'white'}} />
-          </View>
-
-          <View style={{marginTop: 15}}>
-            {[1, 2, 3].map((pdf, i) => (
-              <Pdf key={i} i={i} />
-            ))}
-          </View>
-        </View>
-
-        {/* Videos */}
-        <View style={{marginBottom: 25}}>
+      {topicData && (
+        <View style={{paddingHorizontal: 18}}>
           <View
             style={[
-              styles.pdf_head,
-              {
-                backgroundColor: '#650393',
-                minWidth: 126,
-              },
-            ]}>
-            <Text style={styles.pdf_text}>VIDEOS</Text>
-            <FeatherIcon name="video" size={17} style={{color: 'white'}} />
-          </View>
-
-          <View style={{marginTop: 15}}>
-            {[1, 2, 3].map((video, i) => (
-              <Videos key={i} i={i} />
-            ))}
-          </View>
-        </View>
-
-        {/*Assignments */}
-        <View style={{marginBottom: 25}}>
-          <View
-            style={[
-              styles.pdf_head,
-              {
-                backgroundColor: '#0061BA',
-                minWidth: 180,
-              },
-            ]}>
-            <Text style={styles.pdf_text}>ASSIGNMENTS</Text>
-            <FeatherIcon name="file-text" size={17} style={{color: 'white'}} />
-          </View>
-
-          <View style={{marginTop: 15}}>
-            {[1, 2, 3].map((pdf, i) => (
-              <Assignment key={i} i={i} />
-            ))}
-          </View>
-        </View>
-
-        {/* LINKS */}
-        <View style={{marginBottom: 25}}>
-          <View
-            style={[
-              styles.pdf_head,
+              styles.shape,
               {
                 backgroundColor: '#05CACA',
-                minWidth: 115,
               },
             ]}>
-            <Text style={styles.pdf_text}>LINKS</Text>
-            <FeatherIcon name="link" size={17} style={{color: 'white'}} />
+            <Text style={styles.topic_info}>
+              {topicData.topic_name.toLocaleUpperCase()}
+            </Text>
           </View>
+          {/* PDFS */}
+          {!!topicData.files && (
+            <View style={{marginVertical: 25}}>
+              <View style={styles.pdf_head}>
+                <Text style={styles.pdf_text}>PDFS</Text>
+                <AntIcon name="file-pdf" size={17} style={{color: 'white'}} />
+              </View>
 
-          <View style={{marginTop: 15}}>
-            {[1, 2, 3].map((pdf, i) => (
-              <AllLink key={i} i={i} />
-            ))}
-          </View>
+              <View style={{marginTop: 15}}>
+                {topicData?.files?.map((pdf: any, i: number) => (
+                  <Pdf key={i} i={i} />
+                ))}
+              </View>
+            </View>
+          )}
+
+          {!!topicData.videos && (
+            <View style={{marginBottom: 25}}>
+              {/* Videos */}
+              <View
+                style={[
+                  styles.pdf_head,
+                  {
+                    backgroundColor: '#650393',
+                    minWidth: 126,
+                  },
+                ]}>
+                <Text style={styles.pdf_text}>VIDEOS</Text>
+                <FeatherIcon name="video" size={17} style={{color: 'white'}} />
+              </View>
+
+              <View style={{marginTop: 15}}>
+                {topicData?.videos?.map((video, i) => (
+                  <Videos key={i} i={i} />
+                ))}
+              </View>
+            </View>
+          )}
+
+          {/*Assignments */}
+          {!!topicData.files.length && (
+            <View style={{marginBottom: 25}}>
+              <View
+                style={[
+                  styles.pdf_head,
+                  {
+                    backgroundColor: '#0061BA',
+                    minWidth: 180,
+                  },
+                ]}>
+                <Text style={styles.pdf_text}>ASSIGNMENTS</Text>
+                <FeatherIcon
+                  name="file-text"
+                  size={17}
+                  style={{color: 'white'}}
+                />
+              </View>
+
+              <View style={{marginTop: 15}}>
+                {topicData.files.map((pdf, i) => (
+                  <Assignment key={i} i={i} />
+                ))}
+              </View>
+            </View>
+          )}
+
+          {/* LINKS */}
+          {!!topicData.links.length && (
+            <View style={{marginBottom: 25}}>
+              <View
+                style={[
+                  styles.pdf_head,
+                  {
+                    backgroundColor: '#05CACA',
+                    minWidth: 115,
+                  },
+                ]}>
+                <Text style={styles.pdf_text}>LINKS</Text>
+                <FeatherIcon name="link" size={17} style={{color: 'white'}} />
+              </View>
+
+              <View style={{marginTop: 15}}>
+                {topicData.links.map((pdf, i) => (
+                  <AllLink key={i} i={i} />
+                ))}
+              </View>
+            </View>
+          )}
         </View>
-      </View>
+      )}
     </ScrollView>
   );
 };

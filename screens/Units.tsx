@@ -1,12 +1,23 @@
-import {ScrollView, StyleSheet, View} from 'react-native';
+import {ScrollView, StyleSheet, Text, View} from 'react-native';
 import React, {useEffect, useState} from 'react';
 import Unit from '../components/Units/Unit';
-import {useSelector} from 'react-redux';
-import {initialStateTypes} from '../redux/reducers/universityReducer';
-const Units = ({navigation}: any) => {
-  const university_data = useSelector((state: any) => state.universityReducer);
+import {useDispatch, useSelector} from 'react-redux';
+import LottieView from 'lottie-react-native';
+import Assets from '../assets/index';
+
+import {useNavigation} from '@react-navigation/native';
+import {getAllUnits} from '../redux/actions/unitsAction';
+import {RootState} from '../store/store';
+import {UnitObject} from '../redux/type';
+const Units = ({route}: any) => {
+  const dispatch = useDispatch();
+  const {unitData, loading} = useSelector((state: RootState) => state.units);
+
   useEffect(() => {
-    console.log(university_data);
+    console.log(unitData, 'in unit screen');
+
+    dispatch(getAllUnits(route.params.subject));
+
     return () => {
       setActiveAnimation(false);
     };
@@ -22,18 +33,53 @@ const Units = ({navigation}: any) => {
         flex: 1,
         // justifyContent: 'center',
       }}>
+      {/* <View>
+        <Text
+          style={{
+            fontSize: 35,
+            color: 'blue',
+          }}>
+          {route.params.subject}
+        </Text>
+      </View> */}
       {/*Units Container */}
-      <View
-        style={{
-          paddingHorizontal: 20,
-          marginTop: 45,
-        }}>
-        {/* UNIT */}
+      {!loading ? (
+        <View
+          style={{
+            paddingHorizontal: 20,
+            marginTop: 45,
+          }}>
+          {/* UNIT */}
 
-        {[1, 2, 3, 4, 5].map((unit, i) => (
-          <Unit key={i} i={i} unit={unit} activeAnimation={activeAnimation} />
-        ))}
-      </View>
+          {unitData.map((unit: UnitObject, i: number) => (
+            <Unit key={i} i={i} unit={unit} activeAnimation={activeAnimation} />
+          ))}
+        </View>
+      ) : (
+        <View
+          style={{
+            // marginTop: 60,
+            flex: 1,
+            width: '100%',
+            height: '100%',
+            // justifyContent: 'center',
+            alignItems: 'center',
+          }}>
+          <LottieView
+            // ref={animation => {
+            //   this.animation = animation;
+            // }}
+            style={{
+              width: 70,
+              height: 70,
+            }}
+            loop
+            autoPlay
+            source={Assets.lottieFiles.new}
+            // colorFilters={[{keypath: 'Plane', color: 'rgb(255, 100, 0)'}]}
+          />
+        </View>
+      )}
     </ScrollView>
   );
 };

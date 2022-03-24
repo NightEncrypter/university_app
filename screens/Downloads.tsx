@@ -126,12 +126,12 @@ const Downloads = ({navigation}: any) => {
 
     pdf: {
       backgroundColor: 'white',
-      marginVertical: 3,
+      marginVertical: 4,
       flexDirection: 'row',
       justifyContent: 'space-between',
       alignItems: 'center',
-      paddingHorizontal: 20,
-      paddingVertical: 7,
+      paddingHorizontal: 15,
+      paddingVertical: 3,
       width: '100%',
       // shadowColor: '#2CE6FF',
       shadowOffset: {

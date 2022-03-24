@@ -12,6 +12,8 @@ import {useNavigation} from '@react-navigation/native';
 
 import * as Animatable from 'react-native-animatable';
 import UnitTopics from './UnitTopics';
+import LinearGradient from 'react-native-linear-gradient';
+import {TopicObject, UnitObject} from '../../redux/type';
 //
 const Unit = ({
   unit,
@@ -19,7 +21,7 @@ const Unit = ({
   activeAnimation,
 }: {
   i: number;
-  unit: any;
+  unit: UnitObject;
   activeAnimation: boolean;
 }) => {
   const styles = StyleSheet.create({
@@ -39,7 +41,6 @@ const Unit = ({
       alignItems: 'center',
       borderRadius: 25,
       shadowColor: '#2CE6FF',
-      // marginVertical: 15,
     },
     unit_content: {
       fontFamily: 'Poppins-Regular',
@@ -81,33 +82,33 @@ const Unit = ({
     }).start();
   };
 
-  // const _start = () => {
-
-  // };
-
   return (
     <Animatable.View
       animation={activeAnimation ? 'bounceOutLeft' : 'bounceIn'}
       delay={activeAnimation ? 300 * i : 300 * i}
-      style={{marginBottom: 15}}>
+      style={{marginBottom: 25}}>
       <StatusBar hidden={true} />
-      <View
+      <LinearGradient
+        colors={['#00D2EE', '#007B8B']}
         style={[
           styles.unit,
           {
-            backgroundColor:
-              i < 2
-                ? i == 0
-                  ? '#FF4343'
-                  : '#05CACA'
-                : i < 4
-                ? i == 3
-                  ? '#BB57EA'
-                  : '#0076E3'
-                : '#2CE6FF',
+            backgroundColor: '#007888',
           },
+          // {
+          //   backgroundColor:
+          //     i < 2
+          //       ? i == 0
+          //         ? '#FF4343'
+          //         : '#05CACA'
+          //       : i < 4
+          //       ? i == 3
+          //         ? '#BB57EA'
+          //         : '#0076E3'
+          //       : '#2CE6FF',
+          // },
         ]}>
-        <Text style={styles.unit_no}>Unit-{unit}</Text>
+        <Text style={styles.unit_no}>Unit-{unit.unit_no}</Text>
         <TouchableOpacity onPress={openUnitBox}>
           {/* <Animatable.Text
             ref={AnimationRef}
@@ -121,7 +122,7 @@ const Unit = ({
           />
           {/* </Animatable.Text> */}
         </TouchableOpacity>
-      </View>
+      </LinearGradient>
 
       <Animated.View
         style={[
@@ -150,12 +151,12 @@ const Unit = ({
               fontFamily: 'Poppins-Bold',
               textAlign: 'center',
             }}>
-            VLSI Design
+            {unit.name}
           </Text>
         </View>
 
-        {[1, 2, 3, 4, 5].map((topic, i) => (
-          <UnitTopics key={i} t={topic} />
+        {unit.topics.map((topic: TopicObject, i: number) => (
+          <UnitTopics key={i} topic={topic} />
         ))}
       </Animated.View>
     </Animatable.View>

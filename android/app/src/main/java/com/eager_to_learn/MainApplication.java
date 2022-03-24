@@ -1,5 +1,5 @@
 package com.eager_to_learn;
-
+import com.airbnb.android.react.lottie.LottiePackage;
 import android.app.Application;
 import android.content.Context;
 import com.facebook.react.PackageList;
@@ -26,6 +26,8 @@ public class MainApplication extends Application implements ReactApplication {
           List<ReactPackage> packages = new PackageList(this).getPackages();
            
           // Packages that cannot be autolinked yet can be added manually here, for example:
+
+          packages.add(new LottiePackage());
           // packages.add(new VectorIconsPackage());
           // packages.add(new MyReactNativePackage());
           return packages;

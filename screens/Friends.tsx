@@ -248,7 +248,7 @@ const Downloads = ({navigation}: any) => {
             ].map(
               (friends, i) =>
                 isFocused && (
-                  <Animatable.View animation={'bounce'} delay={i * 300} key={i}>
+                  <Animatable.View animation={'zoomIn'} delay={i * 300} key={i}>
                     <TouchableOpacity
                       style={styles.friends_box}
                       onPress={() => navigation.navigate('Profile')}>
@@ -316,7 +316,7 @@ const Downloads = ({navigation}: any) => {
             ].map(
               (friends_box, i) =>
                 isFocused && (
-                  <Animatable.View animation={'bounce'} delay={i * 300} key={i}>
+                  <Animatable.View animation={'zoomIn'} delay={i * 300} key={i}>
                     <TouchableOpacity
                       style={styles.friends_box}
                       onPress={() => navigation.navigate('Profile')}>
@@ -388,7 +388,7 @@ const Downloads = ({navigation}: any) => {
             ].map(
               (friends_box, i) =>
                 isFocused && (
-                  <Animatable.View animation={'bounce'} delay={i * 300} key={i}>
+                  <Animatable.View animation={'zoomIn'} delay={i * 300} key={i}>
                     <TouchableOpacity
                       style={styles.friends_box}
                       onPress={() => navigation.navigate('Profile')}>

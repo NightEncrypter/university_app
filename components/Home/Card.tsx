@@ -3,7 +3,8 @@ import {useIsFocused} from '@react-navigation/native';
 import React, {Fragment} from 'react';
 import {useNavigation} from '@react-navigation/native';
 import * as Animatable from 'react-native-animatable';
-const Card = ({course, index}: any) => {
+import {subjectObject} from '../../redux/type';
+const Card = ({course, index}: {course: subjectObject; index: number}) => {
   const navigation = useNavigation<any>();
   const isFocused = useIsFocused();
 
@@ -18,10 +19,7 @@ const Card = ({course, index}: any) => {
             style={styles.box}
             onPress={() => console.log('hey')}>
             <View style={styles.img_container}>
-              <Image
-                source={require('../../assets/img/books.jpg')}
-                style={styles.main_img}
-              />
+              <Image source={{uri: course.img}} style={styles.main_img} />
             </View>
 
             <View
@@ -29,24 +27,32 @@ const Card = ({course, index}: any) => {
                 alignItems: 'flex-start',
               }}>
               <View style={styles.subject_container}>
-                <Text style={styles.subject}>{course}</Text>
+                <Text style={styles.subject}>{course.name}</Text>
               </View>
             </View>
 
             <View style={{marginTop: -12}}>
               <Text style={styles.complete}>
-                80% <Text>Complete</Text>
+                {course.subject_status}% <Text>Complete</Text>
               </Text>
 
               <View style={styles.process_container_middle}>
                 <View style={styles.process_container}>
-                  <View style={styles.process}></View>
+                  <View
+                    style={[
+                      styles.process,
+                      {width: `${course.subject_status.toString()}%`},
+                    ]}></View>
                 </View>
               </View>
 
               <TouchableOpacity
                 style={styles.review_btn}
-                onPress={() => navigation.navigate('Units')}>
+                onPress={() =>
+                  navigation.navigate('Units', {
+                    subject: course.id,
+                  })
+                }>
                 <Text style={styles.review_btn_text}>Review Course</Text>
               </TouchableOpacity>
             </View>
@@ -133,7 +139,7 @@ const styles = StyleSheet.create({
     // elevation: 5,
   },
   process: {
-    width: '80%',
+    // width: '80%',
     backgroundColor: '#47A347',
     borderRadius: 20,
     height: '100%',
